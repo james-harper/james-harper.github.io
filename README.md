@@ -8,4 +8,5 @@ https://james-harper.github.io/
 ## To do
 - Split the different parts into their own Vue components
 - Transpile, minify and concatenate scripts
+- Improve performance
 - Add more features - eg saving/removing articles or some way to configure feeds
