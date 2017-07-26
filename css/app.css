@@ -3,7 +3,7 @@
 }
 
 .hand-cursor {
-	cursor: hand
+	cursor: hand-cursor;
 }
 
 .card .card-content .card-title {
