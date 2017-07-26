@@ -1,4 +1,4 @@
-new Vue({
+const vm = new Vue({
     el: '#app',
     data: {
         feed: [],
@@ -122,12 +122,16 @@ new Vue({
                 this.filters.push(source);
             }
         },
-        clearSearch() {
+        clearSearch(resetPage = true) {
             this.search = '';
             this.filters = [];
-            this.setPage(1);
+
+            if (resetPage) {
+                this.setPage(1);
+            }            
         },
         nextPage() {
+            console.log('tset')
             if (this.page >= this.totalPages) {
                 return;
             }
@@ -163,4 +167,36 @@ new Vue({
             return queryString;
         }
     }
+});
+
+const key = {
+    enter: 13,
+    leftArrow: 37,
+    rightArrow: 39,
+    s: 83
+};
+
+document.addEventListener('keydown', (e) => {
+    let searchBox = document.getElementById('search');
+    if (searchBox != document.activeElement) {
+        switch (e.which) {
+            case key.leftArrow:
+                vm.previousPage(); 
+                break;
+            case key.rightArrow:
+                vm.nextPage();
+                break;
+            case key.s:
+                searchBox.focus();
+                e.preventDefault();
+                break;
+
+        }
+    } else {
+        if (e.which === key.enter) {
+            // Enter
+            e.preventDefault();
+            searchBox.blur();
+        }
+    }    
 });
