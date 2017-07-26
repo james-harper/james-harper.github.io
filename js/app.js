@@ -91,6 +91,7 @@ new Vue({
 					article.source = '@'+response.data.source;
 					article.publishedAt = moment(article.publishedAt);
 					article.timeAgo = article.publishedAt.fromNow();
+					article.urlToImage.replace("http://", "https://");
 				});
 
 				this.feed.push(...articles);
