@@ -1,20 +1,20 @@
 .hidden {
-	display: none;
+    display: none;
 }
 
 .hand-cursor {
-	cursor: hand-cursor;
+    cursor: hand-cursor;
 }
 
 .card .card-content .card-title {
-	font-size: 22px;
+    font-size: 22px;
 }
 
 .card .card-image img {
-	max-height: 200px;
+    max-height: 200px;
 }
 
 .pagination .active {
-	background-color: #607d8b !important;
-	color: #FFFFFF;
+    background-color: #607d8b !important;
+    color: #FFFFFF;
 }
