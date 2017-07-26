@@ -171,6 +171,7 @@ const vm = new Vue({
 
 const key = {
     enter: 13,
+    escape: 27,
     leftArrow: 37,
     rightArrow: 39,
     s: 83
@@ -190,7 +191,8 @@ document.addEventListener('keydown', (e) => {
                 searchBox.focus();
                 e.preventDefault();
                 break;
-
+            case key.escape:
+                vm.clearSearch();
         }
     } else {
         if (e.which === key.enter) {
