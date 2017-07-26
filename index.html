@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>		
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="News feed aggregator">
+		<meta name="keywords" content="Vue, Materialize, Axios, News feed, SPA, Javascript">
+		<meta name="author" content="James Harper">
+		<title>News Feed</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+		<link rel="stylesheet" type="text/css" href="./css/app.css">		
+	  	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	  	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">		
+	</head>
+
+	<body class="grey lighten-2">
+		<div id="app" class="container">
+			
+		<header>
+	    	<nav>
+				<div class="nav-wrapper top-nav blue-grey darken-2 col s12">
+					<a class="brand-logo right hand-cursor" @click="clearSearch()">News</a>	
+					<form>
+						<div class="input-field left">
+					  		<input id="search" type="search" v-model="search">
+						  	<label class="label-icon" for="search" style="top: -10 !important"><i class="material-icons">search</i></label>
+						  	<i class="material-icons" @click="clearSearch()">close</i>
+						</div>
+					</form>
+				</div>		    
+		  </nav>
+    	</header>
+
+    	<main>			
+			<div class="row">
+		        <div class="col s12 m4" :class="{hidden: item.isHidden}" v-for="item in filteredFeed">
+		        	<div class="card large z-depth-1 blue-grey darken-1">
+		        		<span style="margin-left:3px; color: #ddd; font-size: 13px"><i>{{item.timeAgo}}<i></span>
+		        		<div class="card-image">
+		        			<a v-bind:href="item.url" v-bind:title="item.description" target="_blank">
+		        			<img v-bind:src="item.urlToImage" class="s12">		        			
+		        		</div>							
+			            <div class="card-content white-text">	
+							<h6 class="card-title white-text center-align">
+	            				{{item.title}}
+            				</h6>
+	            			</a>
+			            </div>
+			            <div class="card-action right-align">
+				          <div @click="toggleFilter(item.source)" class="chip hand-cursor">
+						    {{item.source}}
+						  </div>
+				        </div>
+		          </div>
+		        </div>
+			</div>
+			
+			<div class="row">
+		        <ul class="pagination center-align" v-show="filteredFeed.length">
+				    <li :class="{disabled: page === 1}"><a @click="previousPage()"><i class="material-icons">chevron_left</i></a></li>
+				    <li v-for="n in totalPages" :class="{active: n == page}">
+				    	<a class="hand-cursor" @click="setPage(n)">{{n}}</a>
+			    	</li>
+				    <li class="waves-effect" :class="{disabled: page === totalPages}"><a @click="nextPage()"><i class="material-icons">chevron_right</i></a></li>
+			  </ul>
+		    </div>
+
+			
+			<div v-show="initialised && !filteredFeed.length">No articles to show</div>			
+		</main>
+
+			<footer class="right-align">
+				<span v-show="initialised">Last updated at: {{lastUpdatedAt}}</span>	
+			</footer>	
+		</div>
+	</body>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.min.js"></script>
+	<script src="./js/sources.js"></script>
+	<script src="./js/app.js"></script>
+</html>
