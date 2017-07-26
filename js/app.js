@@ -150,7 +150,6 @@ new Vue({
                 this.filteredFeed[i].isHidden = shouldHide;
             }
 
-            let qs = this.decodeQueryString();
             this.page = newPage;
             this.updateUrl();
         },
