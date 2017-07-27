@@ -47,6 +47,9 @@ const vm = new Vue({
         },
         totalPages() {
             return Math.ceil(this.filteredFeed.length / this.perPage);
+        },
+        isMobile() {
+            return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         }
     },
     watch: {

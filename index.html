@@ -55,17 +55,17 @@
             
             <div class="row">
                 <ul class="pagination center-align" v-show="filteredFeed.length">
-                    <li :class="{disabled: page === 1}">
+                    <li :class="{disabled: page === 1, 'col s2': isMobile}">
                         <a @click="previousPage()">
                             <i class="material-icons">chevron_left</i>
                         </a>
                     </li>
 
-                    <li v-for="n in totalPages" :class="{active: n == page}">
+                    <li v-for="n in totalPages" :class="{active: n == page, 'col s2': isMobile}">
                         <a class="hand-cursor" @click="setPage(n)">{{n}}</a>
                     </li>
 
-                    <li class="waves-effect" :class="{disabled: page === totalPages}">
+                    <li class="waves-effect" :class="{disabled: page === totalPages, 'col s2': isMobile}">
                         <a @click="nextPage()">
                             <i class="material-icons">chevron_right</i>
                         </a>
