@@ -61,7 +61,6 @@ const vm = new Vue({
     methods: {
         updateUrl() {
             let url = window.location.origin + window.location.pathname;
-            let qs = this.decodeQueryString();
             let toAppend = [];
 
             if (this.search.length) {                       
@@ -134,7 +133,6 @@ const vm = new Vue({
             }            
         },
         nextPage() {
-            console.log('tset')
             if (this.page >= this.totalPages) {
                 return;
             }
