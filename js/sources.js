@@ -5,14 +5,12 @@ const sources = [
     'cnn',
     'engadget',
     'entertainment-weekly',
-    'espn',
     'hacker-news',
     'independent',
     'mashable',
     'metro',
     'mirror',
     'mtv-news',
-    'national-geographic',
     'polygon',
     'recode',
     'reddit-r-all',
@@ -27,8 +25,6 @@ const sources = [
 ];
 
 const forceHttpImage = [
-    'espn',
     'mirror',
-    'national-geographic',
     'reddit-r-all',
 ];
