@@ -30,4 +30,5 @@ const forceHttpImage = [
     'espn',
     'mirror',
     'national-geographic',
+    'reddit-r-all',
 ];
