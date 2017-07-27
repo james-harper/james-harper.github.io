@@ -27,5 +27,6 @@ const sources = [
 ];
 
 const forceHttpImage = [
+    'espn',
     'mirror',
 ];
