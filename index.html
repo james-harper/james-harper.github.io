@@ -41,9 +41,7 @@
                             <img v-bind:src="item.urlToImage" class="s12">                          
                         </div>                          
                         <div class="card-content white-text">   
-                            <h6 class="card-title white-text center-align">
-                                {{item.title}}
-                            </h6>
+                            <h6 class="card-title white-text center-align" v-html="item.title"></h6>                           
                             </a>
                         </div>
                         <div class="card-action right-align">
