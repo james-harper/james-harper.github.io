@@ -25,3 +25,7 @@ const sources = [
     'the-telegraph',
     'time',
 ];
+
+const forceHttpImage = [
+    'mirror',
+];

@@ -93,7 +93,10 @@ const vm = new Vue({
                     article.source = '@'+response.data.source;
                     article.publishedAt = moment(article.publishedAt);
                     article.timeAgo = article.publishedAt.fromNow();
-                    article.urlToImage = article.urlToImage.replace("http://", "https://");
+                    
+                    if (!_.includes(forceHttpImage, response.data.source) && article.urlToImage !== null) {
+                        article.urlToImage = article.urlToImage.replace("http://", "https://");
+                    }
                 });
 
                 this.feed.push(...articles);
