@@ -11,7 +11,7 @@ const vm = new Vue({
         perPage: 9,
         page: 0,
     },
-    created() {     
+    created() {
         let qs = this.decodeQueryString();
 
         if (qs['q'] !== undefined) {
@@ -20,7 +20,7 @@ const vm = new Vue({
 
         if (qs['page'] !== undefined) {
             this.page = qs['page'];
-        } 
+        }
 
         this.updateFeed();
         this.interval = setInterval(() => {this.updateFeed()}, 60000);
@@ -50,12 +50,16 @@ const vm = new Vue({
         },
         isMobile() {
             return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        },
+        visibleArticles() {
+            let hiddenCount = document.querySelectorAll('.card-container.hidden').length;
+            return this.feed.length - hiddenCount; 
         }
     },
     watch: {
         search: function() {
-            this.setPage(1); 
-            this.updateUrl();               
+            this.setPage(1);
+            this.updateUrl();
         }
     },
     methods: {
@@ -63,12 +67,12 @@ const vm = new Vue({
             let url = window.location.origin + window.location.pathname;
             let toAppend = [];
 
-            if (this.search.length) {                       
-                toAppend.push('q='+this.search);                    
+            if (this.search.length) {
+                toAppend.push('q='+this.search);
             }
 
             if (this.page != 1) {
-                toAppend.push('page='+this.page);   
+                toAppend.push('page='+this.page);
             }
 
             if (toAppend.length) {
@@ -85,7 +89,7 @@ const vm = new Vue({
                     apiKey: '8171bf2614d7429a86a9b692b7b5e4c2'
                 }
             })
-            .then(response => {             
+            .then(response => {
                 let articles = response.data.articles;
 
                 articles.filter(article => article.publishedAt)
@@ -93,7 +97,7 @@ const vm = new Vue({
                     article.source = '@'+response.data.source;
                     article.publishedAt = moment(article.publishedAt);
                     article.timeAgo = article.publishedAt.fromNow();
-                    
+
                     if (!_.includes(forceHttpImage, response.data.source) && article.urlToImage !== null) {
                         article.urlToImage = article.urlToImage.replace("http://", "https://");
                     }
@@ -107,11 +111,10 @@ const vm = new Vue({
 
                 this.feed = _.sortBy(this.feed, 'publishedAt').reverse();
                 this.initialised = true;
-                
-                if (this.page === 0) {
-                    this.setPage(1);
-                }                      
-                
+
+                let qs = this.decodeQueryString();
+                this.setPage(qs['page'] || 1);
+
                 this.lastUpdatedAt = new Date().toLocaleTimeString();
 
             });
@@ -136,7 +139,7 @@ const vm = new Vue({
 
             if (resetPage) {
                 this.setPage(1);
-            }            
+            }
         },
         nextPage() {
             if (this.page >= this.totalPages) {
@@ -154,7 +157,7 @@ const vm = new Vue({
         },
         setPage(newPage) {
             let lowerLimit = (newPage - 1) * this.perPage;
-            let upperLimit = (this.perPage * newPage) - 1;                  
+            let upperLimit = (this.perPage * newPage) - 1;
 
             for (let i = 0; i < this.filteredFeed.length; i++) {
                 let shouldHide = (i < lowerLimit) || (i > upperLimit);
@@ -189,10 +192,10 @@ document.addEventListener('keydown', (e) => {
     if (searchBox != document.activeElement) {
         switch (e.which) {
             case key.leftArrow:
-                vm.previousPage(); 
+                e.ctrlKey ? vm.setPage(1) : vm.previousPage();
                 break;
             case key.rightArrow:
-                vm.nextPage();
+                e.ctrlKey ? vm.setPage(vm.totalPages) : vm.nextPage();
                 break;
             case key.s:
                 searchBox.focus();
@@ -203,9 +206,8 @@ document.addEventListener('keydown', (e) => {
         }
     } else {
         if (e.which === key.enter) {
-            // Enter
             e.preventDefault();
             searchBox.blur();
         }
-    }    
+    }
 });
