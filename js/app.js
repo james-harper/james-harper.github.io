@@ -165,6 +165,7 @@ new Vue({
             this.setPage(this.page - 1);
         },
         setPage(newPage) {
+            newPage = parseInt(newPage);
             let lowerLimit = (newPage - 1) * this.perPage;
             let upperLimit = (this.perPage * newPage) - 1;
 
