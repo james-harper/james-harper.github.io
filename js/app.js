@@ -107,7 +107,10 @@ const vm = new Vue({
 
                 this.feed = _.sortBy(this.feed, 'publishedAt').reverse();
                 this.initialised = true;
-                this.setPage(1);                        
+                
+                if (this.page === 0) {
+                    this.setPage(1);
+                }                      
                 
                 this.lastUpdatedAt = new Date().toLocaleTimeString();
 
