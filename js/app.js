@@ -4,7 +4,7 @@ const vm = new Vue({
         feed: [],
         filters: [],
         initialised: false,
-        interval: null,
+        timers: [],
         lastUpdatedAt: null,
         search: '',
         sources: sources,
@@ -23,10 +23,16 @@ const vm = new Vue({
         }
 
         this.updateFeed();
-        this.interval = setInterval(() => {this.updateFeed()}, 60000);
+        this.timers['load-articles'] = setInterval(() => {this.updateFeed()}, 60000);
+        this.timers['check-valid-page'] = setInterval(() => {
+            // If page is out of range, go back to page 1
+            if (!document.querySelectorAll('.pagination .active').length) {
+                this.setPage(1);
+            }
+        }, 5000);
     },
     beforeDestroy() {
-        clearInterval(this.interval);
+        this.timers.map(interval => {clearInterval(interval)});
     },
     computed: {
         filteredFeed() {
