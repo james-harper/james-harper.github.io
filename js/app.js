@@ -1,4 +1,12 @@
-const vm = new Vue({
+const key = {
+    enter: 13,
+    escape: 27,
+    leftArrow: 37,
+    rightArrow: 39,
+    s: 83
+};
+
+new Vue({
     el: '#app',
     data: {
         feed: [],
@@ -22,14 +30,9 @@ const vm = new Vue({
             this.page = qs['page'];
         }
 
+        this.registerKeyboardEvents();
         this.updateFeed();
-        this.timers['load-articles'] = setInterval(() => {this.updateFeed()}, 60000);
-        this.timers['check-valid-page'] = setInterval(() => {
-            // If page is out of range, go back to page 1
-            if (!document.querySelectorAll('.pagination .active').length) {
-                this.setPage(1);
-            }
-        }, 5000);
+        this.setTimers();
     },
     beforeDestroy() {
         this.timers.map(interval => {clearInterval(interval)});
@@ -181,39 +184,41 @@ const vm = new Vue({
             }
 
             return queryString;
-        }
-    }
-});
-
-const key = {
-    enter: 13,
-    escape: 27,
-    leftArrow: 37,
-    rightArrow: 39,
-    s: 83
-};
-
-document.addEventListener('keydown', (e) => {
-    let searchBox = document.getElementById('search');
-    if (searchBox != document.activeElement) {
-        switch (e.which) {
-            case key.leftArrow:
-                e.ctrlKey ? vm.setPage(1) : vm.previousPage();
-                break;
-            case key.rightArrow:
-                e.ctrlKey ? vm.setPage(vm.totalPages) : vm.nextPage();
-                break;
-            case key.s:
-                searchBox.focus();
-                e.preventDefault();
-                break;
-            case key.escape:
-                vm.clearSearch();
-        }
-    } else {
-        if (e.which === key.enter) {
-            e.preventDefault();
-            searchBox.blur();
+        },
+        setTimers() {
+            this.timers['load-articles'] = setInterval(() => {this.updateFeed()}, 60000);
+            this.timers['check-valid-page'] = setInterval(() => {
+                // If page is out of range, go back to page 1
+                if (!document.querySelectorAll('.pagination .active').length) {
+                    this.setPage(1);
+                }
+            }, 4000);
+        },
+        registerKeyboardEvents() {
+            document.addEventListener('keydown', (e) => {
+                let searchBox = document.getElementById('search');
+                if (searchBox != document.activeElement) {
+                    switch (e.which) {
+                        case key.leftArrow:
+                            e.ctrlKey ? this.setPage(1) : this.previousPage();
+                            break;
+                        case key.rightArrow:
+                            e.ctrlKey ? this.setPage(this.totalPages) : this.nextPage();
+                            break;
+                        case key.s:
+                            searchBox.focus();
+                            e.preventDefault();
+                            break;
+                        case key.escape:
+                            this.clearSearch();
+                    }
+                } else {
+                    if (e.which === key.enter) {
+                        e.preventDefault();
+                        searchBox.blur();
+                    }
+                }
+            });
         }
     }
 });
