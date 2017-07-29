@@ -41,10 +41,10 @@ new Vue({
         filteredFeed() {
             let feed = this.feed.filter(article => {
                 if (this.search.length) {
-                    let search = this.search.toLowerCase();
-                    return article.title.toLowerCase().includes(search) ||
-                        article.description.toLowerCase().includes(search) ||
-                        article.source.toLowerCase().includes(search);
+                    let search = this.cleanForSearch(this.search);
+                    return this.cleanForSearch(article.title).includes(search) ||
+                        this.cleanForSearch(article.description).includes(search) ||
+                        this.cleanForSearch(article.source).includes(search);
                 }
 
                 if (!this.filters.length) return true;
@@ -220,6 +220,9 @@ new Vue({
                     }
                 }
             });
+        },
+        cleanForSearch(string) {
+            return _.deburr(string.toLowerCase());
         }
     }
 });
