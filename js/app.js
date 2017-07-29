@@ -15,7 +15,7 @@ new Vue({
         timers: [],
         lastUpdatedAt: null,
         search: '',
-        sources: sources,
+        sources,
         perPage: 9,
         page: 0,
     },
@@ -139,7 +139,7 @@ new Vue({
             this.setPage(this.page + 1);
         },
         previousPage() {
-            if (this.page <= 1) { return; }                
+            if (this.page <= 1) { return; }
             this.setPage(this.page - 1);
         },
         setPage(newPage) {
