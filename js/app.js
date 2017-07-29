@@ -218,7 +218,7 @@ new Vue({
             });
         },
         cleanForSearch(string) {
-            return _.deburr(string.toLowerCase());
+            return _.chain(string).deburr().lowerCase().value();
         }
     }
 });
