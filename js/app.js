@@ -109,12 +109,13 @@ new Vue({
                 });
 
                 this.feed.push(...articles);
-                this.feed.filter(article => article.source);
-                this.feed = _.uniqBy(this.feed, 'url');
 
-                this.feed = this.feed.filter(article => article.author && article.source && article.publishedAt && article.urlToImage);
+                this.feed  = _(this.feed)
+                .filter(article => article.source && article.author && article.source && article.publishedAt && article.urlToImage)
+                .uniqBy('url')
+                .sortBy('publishedAt').reverse()
+                .value();
 
-                this.feed = _.sortBy(this.feed, 'publishedAt').reverse();
                 this.initialised = true;
 
                 let qs = this.decodeQueryString();
