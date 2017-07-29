@@ -59,10 +59,6 @@ new Vue({
         },
         isMobile() {
             return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-        },
-        visibleArticles() {
-            let hiddenCount = document.querySelectorAll('.card-container.hidden').length;
-            return this.feed.length - hiddenCount; 
         }
     },
     watch: {
