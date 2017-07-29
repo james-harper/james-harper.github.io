@@ -22,13 +22,8 @@ new Vue({
     created() {
         let qs = this.decodeQueryString();
 
-        if (qs['q'] !== undefined) {
-            this.search = qs['q'];
-        }
-
-        if (qs['page'] !== undefined) {
-            this.page = qs['page'];
-        }
+        if (_.has(qs,'q')) { this.search = qs['q']; }
+        if (_.has(qs,'page')) { this.page = qs['page']; }            
 
         this.registerKeyboardEvents();
         this.updateFeed();
