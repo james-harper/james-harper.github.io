@@ -38,7 +38,7 @@
                         <span style="margin-left:3px; color: #ddd; font-size: 13px"><i>{{item.timeAgo}}<i></span>
                         <div class="card-image">
                             <a v-bind:href="item.url" v-bind:title="item.description" target="_blank">
-                            <img v-bind:src="item.urlToImage" class="s12">                          
+                            <img v-bind:src="!item.isHidden ? item.urlToImage : ''" class="s12">                          
                         </div>                          
                         <div class="card-content white-text">   
                             <h6 class="card-title white-text center-align" v-html="item.title"></h6>                           
