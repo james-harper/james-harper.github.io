@@ -109,7 +109,7 @@ new Vue({
                 });
 
                 this.feed.push(...articles);
-                this.feed.filter(function(article) {return !!article.source; });
+                this.feed.filter(article => article.source);
                 this.feed = _.uniqBy(this.feed, 'url');
 
                 this.feed = this.feed.filter(article => article.author && article.source && article.publishedAt && article.urlToImage);
