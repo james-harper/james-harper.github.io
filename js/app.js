@@ -23,7 +23,7 @@ new Vue({
         let qs = this.decodeQueryString();
 
         if (_.has(qs,'q')) { this.search = qs['q']; }
-        if (_.has(qs,'page')) { this.page = qs['page']; }            
+        if (_.has(qs,'page')) { this.page = qs['page']; }
 
         this.registerKeyboardEvents();
         this.updateFeed();
@@ -67,13 +67,8 @@ new Vue({
             let url = window.location.origin + window.location.pathname;
             let toAppend = [];
 
-            if (this.search.length) {
-                toAppend.push('q='+this.search);
-            }
-
-            if (this.page != 1) {
-                toAppend.push('page='+this.page);
-            }
+            if (this.search.length) { toAppend.push('q='+this.search); }
+            if (this.page != 1) { toAppend.push('page='+this.page); }
 
             if (toAppend.length) {
                 url += '?' + toAppend.join('&');
@@ -134,26 +129,17 @@ new Vue({
                 this.filters.push(source);
             }
         },
-        clearSearch(resetPage = true) {
+        clearSearch() {
             this.search = '';
             this.filters = [];
-
-            if (resetPage) {
-                this.setPage(1);
-            }
+            this.setPage(1);
         },
         nextPage() {
-            if (this.page >= this.totalPages) {
-                return;
-            }
-
+            if (this.page >= this.totalPages) { return; }
             this.setPage(this.page + 1);
         },
         previousPage() {
-            if (this.page <= 1) {
-                return;
-            }
-
+            if (this.page <= 1) { return; }                
             this.setPage(this.page - 1);
         },
         setPage(newPage) {
