@@ -109,7 +109,7 @@ export default {
     },
     /**
      * Sort feed so newest articles come first.
-     * Some filtereing also gets done here to make sure there are no duplicates
+     * Some filtering also gets done here to make sure there are no duplicates
      * and there isn't any information missing from any of the articles.
      */
     sortFeed() {
