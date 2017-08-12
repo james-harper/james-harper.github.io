@@ -11,6 +11,10 @@
 
 <script>
 import SearchBox from './SearchBox.vue';
+
+/**
+ * The main header section
+ */
 export default {
   components: {
     SearchBox

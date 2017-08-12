@@ -1,21 +1,19 @@
 <template>
   <div id="app">
-      <PageHeader></PageHeader>
-      <PageContent></PageContent>
+    <PageHeader></PageHeader>
+    <PageContent></PageContent>
   </div>
 </template>
 
 <script>
 import PageHeader from './components/Header/Header.vue';
 import PageContent from './components/Content/Content.vue';
-// import PageFooter from './components/Footer/Footer.vue';
 
 export default {
   name: 'app',
   components: {
-      PageHeader,
-      PageContent,
-      // PageFooter
+    PageHeader,
+    PageContent
   }
 }
 </script>

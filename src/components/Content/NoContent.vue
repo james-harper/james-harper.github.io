@@ -11,6 +11,9 @@
 </template>
 
 <script>
+/**
+ * Message that shows when the feed is empty
+ */
 export default {
   data() {
     return {
