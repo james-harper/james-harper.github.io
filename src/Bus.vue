@@ -21,11 +21,5 @@ export default new Vue({
       url.update();
     }
   }
-  // created() {
-  //   let qs = url.decodeQueryString();
-
-  //   if (_has(qs,'q')) { this.search = qs['q']; }
-  //   if (_has(qs,'page')) { this.page = qs['page']; }
-  // }
 });
 </script>
