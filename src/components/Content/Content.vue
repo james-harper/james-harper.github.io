@@ -27,6 +27,10 @@ import {sources, forceHttpImage} from './../../dataSources';
 import {clean} from './../../utils/string';
 import url from './../../utils/url';
 
+/**
+ * The main content section of the app.
+ * Contains the news feed.
+ */
 export default {
   components: {
     NewsItem,
@@ -42,8 +46,11 @@ export default {
     }
   },
   computed: {
+    /**
+     * Filter the main feed based on a search term
+     */
     filteredFeed() {
-      let feed = this.feed.filter(article => {
+      return this.feed.filter(article => {
         if (this.search.length) {
           let search = clean(this.search);
           return clean(article.title).includes(search) ||
@@ -53,16 +60,15 @@ export default {
 
         return true;
       });
-
-      return feed;
-    }
-  },
-  watch: {
-    initialised() {
-      this.setPage(1);
     }
   },
   methods: {
+    /**
+     * Make API call to newsapi.org
+     * and store the results
+     *
+     * @param {string} source The news source
+     */
     getFeed(source) {
       return axios.get('https://newsapi.org/v1/articles', {
           params: {
@@ -86,28 +92,50 @@ export default {
         });
 
         this.feed.push(...articles);
-
-        this.feed = this.feed.filter(
-          article => article.source && article.author && article.source && article.timestamp && article.urlToImage
-        );
-
-        this.feed = _uniqBy(this.feed, 'url');
-        this.feed = _sortBy(this.feed, 'timestamp');
-        this.feed = _reverse(this.feed);
-
+        this.sortFeed();
         this.initialised = true;
       })
     },
+    /**
+     * Iterate through list of sources
+     * and get each feed one by one
+     *
+     * @param {Number} i Index of the news source in the array of all sources
+     */
     updateFeed(i = 0) {
       if (i < sources.length) {
           this.getFeed(sources[i]).then(this.updateFeed(i+1));
       }
     },
+    /**
+     * Sort feed so newest articles come first.
+     * Some filtereing also gets done here to make sure there are no duplicates
+     * and there isn't any information missing from any of the articles.
+     */
+    sortFeed() {
+      this.feed = this.feed.filter(
+          article => article.source && article.author && article.source && article.timestamp && article.urlToImage
+        );
+
+      this.feed = _uniqBy(this.feed, 'url');
+      this.feed = _sortBy(this.feed, 'timestamp');
+      this.feed = _reverse(this.feed);
+    },
+    /**
+     * Set the news feed to a page
+     * @param {Number} newPage The page that the feed should be set to
+     */
     setPage(newPage) {
       let lowerLimit = (newPage - 1) * this.perPage;
       let upperLimit = (this.perPage * newPage) - 1;
       this.hideArticles(lowerLimit, upperLimit);
     },
+    /**
+     * Make articles outside of the given range as hidden
+     *
+     * @param {Number} min Hide all articles below this index
+     * @param {Number} max Hide all articles above this index
+     */
     hideArticles(min, max) {
       this.filteredFeed.forEach((article, i) => {
         let shouldHide = (i < min) || (i > max);
@@ -132,7 +160,7 @@ export default {
       this.hideArticles(0, this.perPage - 1);
     });
 
-    setTimeout(() => {this.setPage(app.bus.page)}, 500);
+    setTimeout(() => {this.setPage(app.bus.page)}, 750);
     setInterval(() => {this.updateFeed()}, 30000);
   }
 }
