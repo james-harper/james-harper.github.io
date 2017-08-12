@@ -21,6 +21,9 @@
 </template>
 
 <script>
+/**
+ * Pagination buttons
+ */
 export default {
   props: ['feed', 'active'],
   data() {

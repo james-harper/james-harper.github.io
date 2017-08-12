@@ -9,6 +9,9 @@
 </template>
 
 <script>
+/**
+ * Search box in the header
+ */
 export default {
   data() {
     return {
