@@ -1,6 +1,5 @@
 <script>
 import Vue from 'vue';
-import _has from 'lodash/has';
 
 import url from './utils/url';
 
