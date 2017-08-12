@@ -4,6 +4,10 @@ import _has from 'lodash/has';
 
 import url from './utils/url';
 
+/**
+ * This is responsible for any values or events
+ * that need to be accessed globally
+ */
 export default new Vue({
   data: {
     page: 0,
