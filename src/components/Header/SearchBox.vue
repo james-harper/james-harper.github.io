@@ -58,4 +58,12 @@ export default {
 label {
   top: -10 !important;
 }
+
+.input-field {
+  width: 400px;
+}
+
+i {
+  margin-top: 6px;
+}
 </style>
