@@ -161,7 +161,7 @@ export default {
     });
 
     setTimeout(() => {this.setPage(app.bus.page)}, 750);
-    setInterval(() => {this.updateFeed()}, 30000);
+    setInterval(() => {this.updateFeed()}, 60000);
   }
 }
 </script>
