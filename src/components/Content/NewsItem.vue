@@ -70,7 +70,11 @@ img {
 
 .title {
   font-weight: 300;
-  font-size: 18px;
+  font-size: 20px;
+}
+
+.card-content {
+  padding-top: 10px;
 }
 
 .card-action {
