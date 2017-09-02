@@ -1,6 +1,6 @@
 <template>
 <div class="col s12 m4 card-container" :class="{hidden: item.isHidden}">
-  <div class="card large z-depth-1 blue-grey darken-1">
+  <div class="card medium z-depth-1 blue-grey darken-1">
     <span class="time-ago">{{timeAgo}}</span>
 
     <a :href="item.url" :title="item.description" target="_blank">
@@ -9,7 +9,7 @@
       </div>
 
       <div class="card-content white-text">
-        <h6 class="card-title center-align" v-html="item.title"></h6>
+        <h6 class="title center-align" v-html="item.title"></h6>
       </div>
     </a>
 
@@ -67,5 +67,10 @@ img {
   color: #ddd;
   font-size: 13px;
   font-style: italic;
+}
+
+.title {
+  font-weight: 300;
+  font-size: 18px;
 }
 </style>
