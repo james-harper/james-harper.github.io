@@ -58,7 +58,6 @@ img {
 
 .chip {
   cursor: pointer;
-  cursor: hand;
 }
 
 .time-ago {
@@ -72,5 +71,9 @@ img {
 .title {
   font-weight: 300;
   font-size: 18px;
+}
+
+.card-action {
+  padding: 12px;
 }
 </style>
