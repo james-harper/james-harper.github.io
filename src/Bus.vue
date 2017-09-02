@@ -11,11 +11,12 @@ export default new Vue({
   data: {
     page: 0,
     search: '',
-    perPage: 6,
+    perPage: 9,
   },
   watch: {
     page() {
       this.$emit('page_changed', this.page);
+      document.body.scrollTop = document.documentElement.scrollTop = 80;
       url.update();
     },
     search() {
