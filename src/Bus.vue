@@ -11,7 +11,7 @@ export default new Vue({
   data: {
     page: 0,
     search: '',
-    perPage: 9,
+    perPage: 6,
   },
   watch: {
     page() {
