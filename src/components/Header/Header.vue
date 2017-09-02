@@ -31,7 +31,7 @@ header {
 }
 
 nav {
-  height: 80px;
+  height: 70px;
 }
 
 .brand-logo {
