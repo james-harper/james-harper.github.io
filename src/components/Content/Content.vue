@@ -23,9 +23,9 @@ import _sortBy from 'lodash/sortBy';
 import _reverse from 'lodash/reverse';
 import _has from 'lodash/has';
 
-import {sources, forceHttpImage} from './../../dataSources';
-import {clean} from './../../utils/string';
-import url from './../../utils/url';
+import {sources, forceHttpImage} from '@/dataSources';
+import {clean} from '@/utils/string';
+import url from '@/utils/url';
 
 /**
  * The main content section of the app.
