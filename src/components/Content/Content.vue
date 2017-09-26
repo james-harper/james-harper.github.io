@@ -1,7 +1,7 @@
 <template>
   <main class="container">
     <div class="row">
-      <NewsItem v-for="item in filteredFeed" :item="item"></NewsItem>
+      <NewsItem v-for="item in filteredFeed" :key="item.url" :item="item"></NewsItem>
       <div v-show="!filteredFeed.length && initialised">
         <NoContent></NoContent>
       </div>
