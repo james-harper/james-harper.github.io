@@ -5,7 +5,7 @@
 
     <a :href="item.url" :title="item.description" target="_blank">
       <div class="card-image">
-        <img :src="!item.isHidden ? item.urlToImage : imageCache[item.url]" class="s12">
+        <img :src="imageCache[item.url]" class="s12">
       </div>
 
       <div class="card-content white-text">
