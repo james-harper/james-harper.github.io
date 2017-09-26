@@ -50,7 +50,7 @@ export default {
      * Filter the main feed based on a search term
      */
     filteredFeed() {
-      return this.feed.filter(article => {
+      let feed = this.feed.filter(article => {
         if (this.search.length) {
           let search = clean(this.search);
           return clean(article.title).includes(search) ||
@@ -60,6 +60,9 @@ export default {
 
         return true;
       });
+
+      this.populateImageCache(feed.filter(article => !article.isHidden));
+      return feed;
     }
   },
   methods: {
@@ -147,12 +150,11 @@ export default {
      * Images are lazy loaded - src begins empty and is populated
      * when the image is first viewed.
      * This method updates the global bus with which images have been loaded.
+     * @param {Array} articles articles that should have their images cached
      */
-    populateImageCache() {
-      this.filteredFeed.forEach(article => {
-        if (!article.isHidden) {
-          app.bus.imageCache[article.url] = article.urlToImage;
-        }
+    populateImageCache(articles = []) {
+      articles.forEach(article => {
+        app.bus.imageCache[article.url] = article.urlToImage;
       });
     }
   },
