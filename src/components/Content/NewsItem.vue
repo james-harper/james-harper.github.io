@@ -5,7 +5,7 @@
 
     <a :href="item.url" :title="item.description" target="_blank">
       <div class="card-image">
-        <img :src="!item.isHidden ? item.urlToImage : ''" class="s12">
+        <img :src="!item.isHidden ? item.urlToImage : imageCache[item.url]" class="s12">
       </div>
 
       <div class="card-content white-text">
@@ -28,6 +28,11 @@ import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
  * An individual news item
  */
 export default {
+  data() {
+    return {
+      imageCache: app.bus.imageCache
+    }
+  },
   computed: {
     timeAgo() {
       return distanceInWordsToNow(this.item.publishedAt) + ' ago';

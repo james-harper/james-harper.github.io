@@ -129,6 +129,7 @@ export default {
       let lowerLimit = (newPage - 1) * this.perPage;
       let upperLimit = (this.perPage * newPage) - 1;
       this.hideArticles(lowerLimit, upperLimit);
+      this.populateImageCache();
     },
     /**
      * Make articles outside of the given range as hidden
@@ -140,6 +141,18 @@ export default {
       this.filteredFeed.forEach((article, i) => {
         let shouldHide = (i < min) || (i > max);
         article.isHidden = shouldHide;
+      });
+    },
+    /**
+     * Images are lazy loaded - src begins empty and is populated
+     * when the image is first viewed.
+     * This method updates the global bus with which images have been loaded.
+     */
+    populateImageCache() {
+      this.filteredFeed.forEach(article => {
+        if (!article.isHidden) {
+          app.bus.imageCache[article.url] = article.urlToImage;
+        }
       });
     }
   },

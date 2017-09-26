@@ -12,6 +12,7 @@ export default new Vue({
     page: 0,
     search: '',
     perPage: 9,
+    imageCache: {}
   },
   watch: {
     page() {
