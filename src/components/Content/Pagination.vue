@@ -7,7 +7,7 @@
             </a>
         </li>
 
-        <li v-for="n in getTotalPages()" :class="{active: n === page, 'col s2': isMobile}">
+        <li v-for="n in getTotalPages()" :key="n" :class="{active: n === page, 'col s2': isMobile}">
             <a class="hand-cursor" @click="setPage(n)">{{n}}</a>
         </li>
 
