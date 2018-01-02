@@ -27,5 +27,6 @@ export const sources = [
 export const forceHttpImage = [
   'mirror',
   'reddit-r-all',
-  'the-telegraph'
+  'the-telegraph',
+  'the-lad-bible',
 ];
